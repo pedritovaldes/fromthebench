@@ -24,11 +24,11 @@ class LoadUserData extends AbstractFixture implements FixtureInterface
         $user1->setPassword('12345');
         $manager->persist($user1);
 
-        $user1 = new User();
-        $user1->setNombre('Pedro');
-        $user1->setEmail('prueba2@prueba.com');
-        $user1->setPassword('123456789');
-        $manager->persist($user1);
+        $user2 = new User();
+        $user2->setNombre('Manolo');
+        $user2->setEmail('prueba2@prueba.com');
+        $user2->setPassword('123456789');
+        $manager->persist($user2);
 
         $manager->flush();
     }
