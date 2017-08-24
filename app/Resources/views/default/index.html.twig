@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome" class="row" style="margin-top: 15px">
+                <div class="col-md-6 pull-left">
+                    <h1><span>From The Bench. Prueba.</span></h1>
+                </div>
+
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a class="link" href="{{ path('logout') }}">Logout</a>
+                {% else %}
+
+                    <form action="{{ path('login') }}" method="POST">
+                        <div class="col-md-6 pull-right">
+                            <input type="text" placeholder="Email" name="_username">
+                            <input type="password" placeholder="Password" name="_password">
+                            <button type="submit" class="btn btn-default">Login</button>
+                        </div>
+                    </form>
+
+                {% endif %}
+            </div>
+
+            <table id="tableCLub" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Manager</th>
+                    <th>Descripcion</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for club in clubs %}
+                    <tr>
+                        <td><a href="{{ path('club_show', { 'id': club.id }) }}">{{ club.id }}</a></td>
+                        <td>{{ club.nombre }}</td>
+                        <td>{{ club.manager }}</td>
+                        <td>{{ club.descripcion }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('club_show', { 'id': club.id }) }}">show</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('club_edit', { 'id': club.id }) }}">edit</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+<script>
+    $(document).ready(function() {
+        $('#tableCLub').DataTable();
+    } );
+</script>
+{% endblock %}
+
